@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #a7c8f1;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #d2eaf8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 350px;
+  }
+  
+  fieldset {
+    border: none;
+  }
+  
+  legend {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  label {
+    position: relative;
+    display: block;
+    margin-bottom: 25px;
+  }
+  
+  label span {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 8px 0;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  input::placeholder {
+    color: #aaa;
+    font-style: italic;
+    font-size: 12px;
+  }
+  
+  input:focus {
+    border-bottom-color: #4CAF50;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .footer button {
+    background-color: #f4f4fa;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #555050;
+    cursor: pointer;
+  }
+  
+  .footer button:hover {
+    background-color: #ddd;
+  }
+  
