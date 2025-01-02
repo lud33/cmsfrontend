@@ -102,7 +102,6 @@ function Add() {
                                 required
                             />
                         </label>
-
                         <label>
                             <span>Hall ID</span>
                             <input

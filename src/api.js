@@ -24,3 +24,9 @@ export const getCourseById = async (courseId) => {
     const response = await axios.get(`${API_URL}/${courseId}`);
     return response.data;
 };
+
+// Function to update a course
+export const updateCourse = async (courseId, courseData) => {
+    const response = await axios.put(`${API_URL}/${courseId}`, courseData);
+    return response.data;
+};

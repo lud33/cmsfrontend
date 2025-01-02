@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/Add.css';  // Assuming the styles are in App.css
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Add.css'; // Assuming the styles are in Add.css
+import { updateCourse } from '../api'; // Import the updateCourse function
 
 function Update() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     courseName: '',
     courseId: '',
@@ -21,20 +23,27 @@ function Update() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);  // Handle the form submission logic here (e.g., send data to the backend)
-    // Clear the form after submission
-    setFormData({
-      courseName: '',
-      courseId: '',
-      lecturerId: '',
-      batchId: '',
-      departmentId: '',
-      hallId: '',
-      dayId: '',
-      timeId: ''
-    });
+    try {
+      await updateCourse(formData.courseId, formData); // Update course using courseId
+      console.log('Course updated successfully:', formData);
+      navigate('/Course'); // Navigate to the course management page after successful update
+    } catch (error) {
+      console.error('Error updating course:', error);
+    } finally {
+      // Clear the form after submission
+      setFormData({
+        courseName: '',
+        courseId: '',
+        lecturerId: '',
+        batchId: '',
+        departmentId: '',
+        hallId: '',
+        dayId: '',
+        timeId: ''
+      });
+    }
   };
 
   return (
