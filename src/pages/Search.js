@@ -1,154 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCourseById } from '../api'; // Adjust the path as necessary
 
 const Search = () => {
+  const [courseId, setCourseId] = useState('');
   const navigate = useNavigate();
 
-  const handleBackClick = () => {
-    navigate("/Course");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add form submission logic here
-    console.log("Form submitted");
-  };
-
-  const handleReset = () => {
-    console.log("Form reset");
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    try {
+      const fetchedCourse = await getCourseById(courseId); // Fetch the course by ID
+      navigate("/display", { state: { course: fetchedCourse } }); // Navigate to the display component
+    } catch (error) {
+      console.error("Error fetching course:", error); // Log any errors
+      // Optionally handle errors (e.g., show a notification)
+    }
   };
 
   return (
-    <div style={styles.body}>
-      <div style={styles.container}>
-        <form style={styles.form} onSubmit={handleSubmit}>
-          <fieldset style={styles.fieldset}>
-            <legend style={styles.legend}>Search Course</legend>
-
-            <label style={styles.label}>
-              <span style={styles.labelText}>Course ID</span>
-              <input
-                type="text"
-                name="Course Id"
-                placeholder="Course ID"
-                required
-                style={styles.input}
-              />
-            </label>
-
-            <div style={styles.buttonGroup}>
-              <button type="submit" style={{ ...styles.button, ...styles.submitButton }}>
-                Submit
-              </button>
-              <button
-                type="reset"
-                style={{ ...styles.button, ...styles.resetButton }}
-                onClick={handleReset}
-              >
-                Cancel
-              </button>
-            </div>
-          </fieldset>
-        </form>
-        <div style={styles.back} onClick={handleBackClick}>
-          Back
-        </div>
-      </div>
+    <div style={styles.container}>
+      <h2>Search for a Course</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Course ID:
+          <input
+            type="text"
+            value={courseId}
+            onChange={(e) => setCourseId(e.target.value)}
+            required
+            style={styles.input}
+          />
+        </label>
+        <button type="submit" style={styles.button}>Search</button>
+      </form>
     </div>
   );
 };
 
 const styles = {
-  body: {
-    fontFamily: "Arial, sans-serif",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    margin: "0",
-    backgroundColor: "#a7c8f1",
-  },
   container: {
-    width: "100%",
+    padding: "20px",
     maxWidth: "400px",
-    backgroundColor: "#d2eaf8",
-    padding: "20px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     margin: "0 auto",
-    position: "relative",
-    left: "40px",
-  },
-  form: {
-    backgroundColor: "#fff",
-    padding: "20px",
+    backgroundColor: "#f9f9f9",
     borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    width: "350px",
-  },
-  fieldset: {
-    border: "none",
-  },
-  legend: {
-    fontSize: "1.5em",
-    fontWeight: "bold",
-    marginBottom: "20px",
-    textAlign: "center",
-  },
-  label: {
-    position: "relative",
-    display: "block",
-    marginBottom: "25px",
-  },
-  labelText: {
-    fontWeight: "bold",
-    color: "#333",
-    display: "block",
-    marginBottom: "5px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   },
   input: {
+    padding: "10px",
+    margin: "10px 0",
     width: "100%",
-    border: "none",
-    borderBottom: "2px solid #ccc",
-    padding: "8px 0",
-    fontSize: "16px",
-    outline: "none",
-  },
-  buttonGroup: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
   },
   button: {
-    width: "calc(50% - 5px)",
-    padding: "10px",
-    color: "white",
+    padding: "10px 15px",
+    backgroundColor: "#007bff",
+    color: "#fff",
     border: "none",
     borderRadius: "5px",
-    fontSize: "1em",
-    cursor: "pointer",
-  },
-  submitButton: {
-    backgroundColor: "#85be86",
-  },
-  resetButton: {
-    backgroundColor: "#f44336",
-  },
-  back: {
-    marginTop: "7px",
-    marginLeft: "160px",
-    marginBottom: "1px",
-    textAlign: "center",
-    fontSize: "14px",
-    color: "#555050",
-    padding: "10px 0",
-    borderTop: "1px solid #818287",
-    backgroundColor: "#f4f4fa",
-    width: "100px",
-    height: "15px",
-    borderRadius: "10%",
-    position: "relative",
-    left: "40px",
     cursor: "pointer",
   },
 };
