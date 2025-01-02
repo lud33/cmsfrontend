@@ -10,11 +10,15 @@ export const createCourse = async (courseData) => {
 
 // Function to delete a course
 export const deleteCourse = async (courseId) => {
-    await axios.delete(`${API_URL}/${courseId}`);
+    await axios.delete('${API_URL}/${courseId}');
 };
 
 // Other existing functions (like getCourses)
 export const getCourses = async () => {
     const response = await axios.get(API_URL);
+    return response.data;
+};
+export const getCourseById = async (courseId) => {
+    const response = await axios.get('${API_URL}/${courseId}');
     return response.data;
 };
