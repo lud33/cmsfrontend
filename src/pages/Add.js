@@ -33,7 +33,7 @@ function Add() {
         try {
             const createdCourse = await createCourse(courseData);
             console.log('Course created successfully:', createdCourse);
-            navigate('/course'); // Navigate to the course management page after successful creation
+            navigate('/Course'); // Navigate to the course management page after successful creation
         } catch (error) {
             console.error('Error creating course:', error);
         } finally {
@@ -123,7 +123,7 @@ function Add() {
                 </form>
             </div>
 
-            <Link to="/course">
+            <Link to="/Course">
                 <div className="back">Back</div>
             </Link>
         </div>

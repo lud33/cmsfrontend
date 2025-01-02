@@ -22,19 +22,19 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/user-login" element={<UserLogin />} />
-        <Route path="/admin-page" element={<AdminPage />} />
-        <Route path="/user-page" element={<UserPage />} />
-        <Route path="/course" element={<Course />} />
-        <Route path="/add" element={<Add />} />
-        <Route path="/delete" element={<Delete />} />
-        <Route path="/update" element={<Update />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/lecture" element={<Lecture />} />
-        <Route path="/hall" element={<Hall />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/notification" element={<Notification />} />
+        <Route path="/AdminLogin" element={<AdminLogin />} />
+        <Route path="/UserLogin" element={<UserLogin />} />
+        <Route path="/AdminPage" element={<AdminPage />} />
+        <Route path="/UserPage" element={<UserPage />} />
+        <Route path="/Course" element={<Course />} />
+        <Route path="/Add" element={<Add />} />
+        <Route path="/Delete" element={<Delete />} />
+        <Route path="/Update" element={<Update />} />
+        <Route path="/Search" element={<Search />} />
+        <Route path="/Lecture" element={<Lecture />} />
+        <Route path="/Hall" element={<Hall />} />
+        <Route path="/Schedule" element={<Schedule />} />
+        <Route path="/Notification" element={<Notification />} />
       </Routes>
     </Router>
   );

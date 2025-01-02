@@ -5,7 +5,7 @@ const Schedule = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/home");
+    navigate("/Home");
   };
 
   const handleSubmit = (e) => {

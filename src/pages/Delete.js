@@ -13,7 +13,7 @@ const Delete = () => {
     try {
       await deleteCourse(courseId); // Call the deleteCourse function
       console.log(`Course with ID: ${courseId} has been deleted.`);
-      navigate('/course'); // Redirect to Course.js (Course Management)
+      navigate('/Course'); // Redirect to Course.js (Course Management)
     } catch (error) {
       console.error('Error deleting course:', error);
     }
@@ -44,7 +44,7 @@ const Delete = () => {
         </form>
       </div>
 
-      <div className="back" onClick={() => navigate('/course')}>
+      <div className="back" onClick={() => navigate('/Course')}>
         Back
       </div>
     </div>

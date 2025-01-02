@@ -5,7 +5,7 @@ const Lecture = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/admin");
+    navigate("/AdminPage");
   };
 
   const handleSubmit = (e) => {

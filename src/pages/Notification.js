@@ -5,7 +5,7 @@ const Notification = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/user-page");
+    navigate("/UserPage");
   };
 
   const handleSubmit = (e) => {
