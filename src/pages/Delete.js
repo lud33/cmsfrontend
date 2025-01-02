@@ -7,19 +7,7 @@ const Delete = () => {
     const navigate = useNavigate();
     const [courseId, setCourseId] = useState('');
 
-<<<<<<< HEAD
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await deleteCourse(courseId); // Call the deleteCourse function
-      console.log(`Course with ID: ${courseId} has been deleted.`);
-      navigate('/Course'); // Redirect to Course.js (Course Management)
-    } catch (error) {
-      console.error('Error deleting course:', error);
-    }
-  };
-=======
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -30,7 +18,6 @@ const Delete = () => {
             console.error('Error deleting course:', error); // Log any errors
         }
     };
->>>>>>> 0387885fe751ec887a4e313c5c4d70b30c7ceca0
 
     return (
         <div className="main">
@@ -55,20 +42,11 @@ const Delete = () => {
                     </fieldset>
                 </form>
             </div>
-
-<<<<<<< HEAD
-      <div className="back" onClick={() => navigate('/Course')}>
-        Back
-      </div>
-    </div>
-  );
-=======
             <div className="back" onClick={() => navigate('/course')}>
                 Back
             </div>
         </div>
     );
->>>>>>> 0387885fe751ec887a4e313c5c4d70b30c7ceca0
 };
 
 export default Delete;
