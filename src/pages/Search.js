@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCourseById } from '../api'; // Import the getCourseById function
 
 const Search = () => {
   const navigate = useNavigate();
+  const [courseId, setCourseId] = useState('');
+  const [courseData, setCourseData] = useState(null); // To hold the fetched course data
 
   const handleBackClick = () => {
     navigate("/Course");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log("Form submitted");
+    try {
+      const result = await getCourseById(courseId);
+      setCourseData(result);
+      console.log("Course found:", result);
+    } catch (error) {
+      console.error('Error fetching course:', error);
+      setCourseData(null); // Clear previous data on error
+    }
   };
 
   const handleReset = () => {
+    setCourseId('');
+    setCourseData(null); // Clear course data on reset
     console.log("Form reset");
   };
 
@@ -29,7 +40,8 @@ const Search = () => {
               <span style={styles.labelText}>Course ID</span>
               <input
                 type="text"
-                name="Course Id"
+                value={courseId}
+                onChange={(e) => setCourseId(e.target.value)}
                 placeholder="Course ID"
                 required
                 style={styles.input}
@@ -50,6 +62,16 @@ const Search = () => {
             </div>
           </fieldset>
         </form>
+        {courseData && (
+          <div style={styles.resultContainer}>
+            <h3>Course Details:</h3>
+            <p><strong>Course Name:</strong> {courseData.courseName}</p>
+            <p><strong>Department ID:</strong> {courseData.department.id}</p>
+            <p><strong>Day:</strong> {courseData.day}</p>
+            <p><strong>Time:</strong> {courseData.time}</p>
+            <p><strong>Classroom ID:</strong> {courseData.classroom.id}</p>
+          </div>
+        )}
         <div style={styles.back} onClick={handleBackClick}>
           Back
         </div>
@@ -133,6 +155,12 @@ const styles = {
   },
   resetButton: {
     backgroundColor: "#f44336",
+  },
+  resultContainer: {
+    marginTop: "20px",
+    backgroundColor: "#e0f7fa",
+    padding: "10px",
+    borderRadius: "5px",
   },
   back: {
     marginTop: "7px",

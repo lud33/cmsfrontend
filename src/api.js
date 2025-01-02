@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080/courses"; // Updated URL
+const API_URL = "http://localhost:8080/courses";
 
 // Function to create a new course
 export const createCourse = async (courseData) => {
@@ -10,15 +10,17 @@ export const createCourse = async (courseData) => {
 
 // Function to delete a course
 export const deleteCourse = async (courseId) => {
-    await axios.delete('${API_URL}/${courseId}');
+    await axios.delete(`${API_URL}/${courseId}`);
 };
 
-// Other existing functions (like getCourses)
+// Function to get all courses
 export const getCourses = async () => {
     const response = await axios.get(API_URL);
     return response.data;
 };
+
+// Function to get a course by ID
 export const getCourseById = async (courseId) => {
-    const response = await axios.get('${API_URL}/${courseId}');
+    const response = await axios.get(`${API_URL}/${courseId}`);
     return response.data;
 };

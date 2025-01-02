@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Delete.css';
-import { deleteCourse } from '../api'; // Import the deleteCourse function
+import { deleteCourse } from '../api';
 
 const Delete = () => {
     const navigate = useNavigate();
     const [courseId, setCourseId] = useState('');
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await deleteCourse(courseId); // Call the deleteCourse function
+            await deleteCourse(courseId);
             console.log(`Course with ID: ${courseId} has been deleted.`);
-            navigate('/course'); // Redirect to Course.js (Course Management)
+            navigate('/Course');
         } catch (error) {
-            console.error('Error deleting course:', error); // Log any errors
+            console.error('Error deleting course:', error);
         }
     };
 
@@ -42,7 +41,7 @@ const Delete = () => {
                     </fieldset>
                 </form>
             </div>
-            <div className="back" onClick={() => navigate('/course')}>
+            <div className="back" onClick={() => navigate('/Course')}>
                 Back
             </div>
         </div>
