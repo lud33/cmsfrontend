@@ -1,20 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Add.css'; // Assuming the styles are in Add.css
-import { createCourse } from '../api'; // Import the createCourse function
+import { createCourse, getDepartments } from '../api'; // Import the createCourse and getDepartments functions
 
 function Add() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     courseName: '',
-    courseId: '',
-    lecturerId: '',
-    batchId: '',
-    departmentId: '',
-    hallId: '',
-    dayId: '',
-    timeId: ''
+    departmentId: '', // Change to departmentId
+    day: '', // Change to day
+    time: '', // Change to time
+    classroomId: '', // Change to classroomId
   });
+
+  const [departments, setDepartments] = useState([]); // State to hold departments
+
+  // Fetch departments on component mount
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const data = await getDepartments(); // Fetch departments from the API
+        setDepartments(data);
+      } catch (error) {
+        console.error('Error fetching departments:', error);
+      }
+    };
+
+    fetchDepartments();
+  }, []);
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -32,13 +45,10 @@ function Add() {
       // Clear the form state only after successful submission
       setFormData({
         courseName: '',
-        courseId: '',
-        lecturerId: '',
-        batchId: '',
         departmentId: '',
-        hallId: '',
-        dayId: '',
-        timeId: ''
+        day: '',
+        time: '',
+        classroomId: '',
       });
       navigate('/Course'); // Redirect to the course management page after successful creation
     } catch (error) {
@@ -67,85 +77,53 @@ function Add() {
             </label>
 
             <label>
-              <span>Course ID</span>
-              <input
-                type="text"
-                name="courseId"
-                value={formData.courseId}
-                onChange={handleChange}
-                placeholder="Enter Course ID"
-                required
-              />
-            </label>
-
-            <label>
-              <span>Lecturer ID</span>
-              <input
-                type="text"
-                name="lecturerId"
-                value={formData.lecturerId}
-                onChange={handleChange}
-                placeholder="Enter Lecturer ID"
-                required
-              />
-            </label>
-
-            <label>
-              <span>Batch ID</span>
-              <input
-                type="text"
-                name="batchId"
-                value={formData.batchId}
-                onChange={handleChange}
-                placeholder="Enter Batch ID"
-                required
-              />
-            </label>
-
-            <label>
-              <span>Department ID</span>
-              <input
-                type="text"
+              <span>Department</span>
+              <select
                 name="departmentId"
                 value={formData.departmentId}
                 onChange={handleChange}
-                placeholder="Enter Department ID"
+                required
+              >
+                <option value="">Select Department</option>
+                {departments.map(department => (
+                  <option key={department.id} value={department.id}>
+                    {department.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Day</span>
+              <input
+                type="text"
+                name="day"
+                value={formData.day}
+                onChange={handleChange}
+                placeholder="Enter Day (e.g., Monday)"
                 required
               />
             </label>
 
             <label>
-              <span>Hall ID</span>
+              <span>Time</span>
               <input
-                type="text"
-                name="hallId"
-                value={formData.hallId}
+                type="time"
+                name="time"
+                value={formData.time}
                 onChange={handleChange}
-                placeholder="Enter Hall ID"
                 required
               />
             </label>
 
             <label>
-              <span>Day ID</span>
+              <span>Classroom</span>
               <input
                 type="text"
-                name="dayId"
-                value={formData.dayId}
+                name="classroomId"
+                value={formData.classroomId}
                 onChange={handleChange}
-                placeholder="Enter Day ID"
-                required
-              />
-            </label>
-
-            <label>
-              <span>Time ID</span>
-              <input
-                type="text"
-                name="timeId"
-                value={formData.timeId}
-                onChange={handleChange}
-                placeholder="Enter Time ID"
+                placeholder="Enter Classroom ID"
                 required
               />
             </label>
